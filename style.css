@@ -1,0 +1,18 @@
+body {
+	
+}
+
+#clock {
+	margin: auto;
+	width: 300px;
+	height: 300px;
+	border: solid black 2px;
+}
+
+#timer {
+	margin: 40% 15%;
+	width: 70%;
+	border: solid black 2px;
+	text-align: center;
+	box-sizing: border-box;
+}
