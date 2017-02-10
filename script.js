@@ -10,6 +10,7 @@
 	var timer;
 	var seconds = 0;
 	var minutes = 0;
+	var hours = 0;
 
 
 	/**
@@ -56,6 +57,7 @@
 		clearTimeout(timer);
 		seconds = 0;
 		minutes = 0;
+		hours = 0;
 	}
 
 
@@ -65,19 +67,11 @@
 	*/
 	function startTimer()
 	{
+		
 		processing = true;
 		updateDisplay();
-		iterateTimer();
-	}
-
-
-	/**
-	 * adds 10 miliseconds to the timer
-	 *
-	*/
-	function iterateTimer()
-	{
-		timer = setTimeout(function() {
+		
+		timer = setInterval(function() {
 			
 			seconds += 0.01;
 
@@ -87,10 +81,16 @@
 				seconds = 0;
 			}
 
+			if (minutes > 59)
+			{
+				hours++;
+				minutes = 0;
+			}
+
 			updateDisplay();
-			iterateTimer();
 
 		}, 10);
+
 	}
 
 
@@ -101,8 +101,19 @@
 	function updateDisplay()
 	{
 		var sec = format(seconds.toFixed(2));
-		var min = format(minutes);
-		timerElm.innerHTML = min + ":" + sec;
+		var min = "";
+		var hr = "";
+		
+		if (hours != 0)
+		{
+			hr = format(hours) + ":";
+			min = format(minutes) + ":";
+		}
+		else if (minutes != 0)
+			min = format(minutes) + ":";
+		
+		timerElm.innerHTML = hr + min + sec;
+	
 	}
 
 
