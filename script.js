@@ -4,7 +4,7 @@
 	/**
 	 * global variables
 	 *
-	*/
+	 */
 	var scores = [];
 	var processing = false;
 	var timer;
@@ -12,13 +12,14 @@
 	var minutes = 0;
 	var hours = 0;
 
+	addDeletionEvent();
 	loadScores();
 
 
 	/**
 	 * timer keyboard controls
 	 * 
-	*/
+	 */
 	document.onkeydown = function(e) {
 
 		switch (e.keyCode)
@@ -39,7 +40,7 @@
 	/**
 	 * stops/starts the timer
 	 *
-	*/
+	 */
 	function toggleTimer()
 	{
 		if (processing)
@@ -52,7 +53,7 @@
 	/**
 	 * stops the timer
 	 *
-	*/
+	 */
 	function stopTimer()
 	{
 		addNewScore();
@@ -68,7 +69,7 @@
 	/**
 	 * starts the timer
 	 *
-	*/
+	 */
 	function startTimer()
 	{
 
@@ -101,7 +102,7 @@
 	/**
 	 * updates the timer html element contents
 	 *
-	*/
+	 */
 	function updateDisplay()
 	{
 		var sec = format(seconds.toFixed(2));
@@ -124,7 +125,7 @@
 	/**
 	 * adds a zero at the beginning
 	 * if the number is less than 10
-	*/
+	 */
 	function format(value)
 	{
 		if (value < 10)
@@ -137,7 +138,7 @@
 	/**
 	 * adds and saves the scored time
 	 *
-	*/
+	 */
 	function addNewScore()
 	{
 		var text = $("#timer").text();
@@ -150,7 +151,7 @@
 	/**
 	 * adds a score to the html content
 	 *
-	*/
+	 */
 	function addScore(score, idNum)
 	{
 
@@ -160,22 +161,29 @@
 			"text": score
 		}).appendTo($("#scores"));
 
-		// addition of the event
-		$(".score:eq(" + idNum + ")").on("click", function() {
+	}
+
+
+	/**
+	 * adds an event to all elements of score class
+	 *
+	 */
+	function addDeletionEvent()
+	{//$("body").on("click", ".greeny", function()
+		$("#scores").on("click", ".score", function() {
 
 			scores.splice($(this).index(), 1);
 			this.remove();
 			saveScores();
 
 		});
-
 	}
 
 
 	/**
 	 * saves the scores into local storage
 	 *
-	*/
+	 */
 	function saveScores()
 	{
 		localStorage.StWscores = JSON.stringify(scores);
@@ -185,7 +193,7 @@
 	/**
 	 * loads the scores from the local storage
 	 *
-	*/
+	 */
 	function loadScores()
 	{
 		if (!localStorage.StWscores) return;
