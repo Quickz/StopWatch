@@ -12,13 +12,19 @@
 	var minutes = 0;
 	var hours = 0;
 
+	/**
+	 * prevents key down/up events
+	 * from firing twice in a row
+	 */
+	var keyDown = false;
+
 	addDeletionEvent();
 	loadScores();
 
 
 	/**
 	 * timer keyboard controls
-	 * 
+	 * triggered when pressing a key down
 	 */
 	document.onkeydown = function(e) {
 
@@ -29,25 +35,42 @@
 			// enter
 			case 13:
 				e.preventDefault();
-				toggleTimer();
+
+				if (processing)
+				{
+					stopTimer();
+					keyDown = true;
+				}
+
 				break;
 		}
-
 
 	};
 
 
 	/**
-	 * stops/starts the timer
-	 *
+	 * timer keyboard controls
+	 * triggered when releasing a key
 	 */
-	function toggleTimer()
-	{
-		if (processing)
-			stopTimer();
-		else
-			startTimer();
-	}
+	document.onkeyup = function(e) {
+
+		switch (e.keyCode)
+		{
+			// space
+			case 32:
+			// enter
+			case 13:
+				e.preventDefault();
+
+				if (!processing && !keyDown)
+					startTimer();
+				else
+					keyDown = false;
+
+				break;
+		}
+
+	};
 
 
 	/**
@@ -57,7 +80,6 @@
 	function stopTimer()
 	{
 		addNewScore();
-
 		processing = false;
 		clearTimeout(timer);
 		seconds = 0;
