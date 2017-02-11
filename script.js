@@ -1,12 +1,10 @@
-(function() {
+(function($) {
 
 
 	/**
 	 * global variables
 	 *
 	*/
-	var timerElm = document.getElementById("timer");
-	var scoreElm = document.getElementById("scores");
 	var scores = [];
 	var processing = false;
 	var timer;
@@ -118,7 +116,7 @@
 		else if (minutes != 0)
 			min = format(minutes) + ":";
 		
-		timerElm.innerHTML = hr + min + sec;
+		$("#timer").text(hr + min + sec);
 	
 	}
 
@@ -142,8 +140,9 @@
 	*/
 	function addNewScore()
 	{
-		scores.push(timerElm.innerHTML);
-		addScore(timerElm.innerHTML, scores.length - 1);
+		var text = $("#timer").text();
+		scores.push(text);
+		addScore(text, scores.length - 1);
 		saveScores();
 	}
 
@@ -152,22 +151,23 @@
 	 * adds a score to the html content
 	 *
 	*/
-	function addScore(score, idNumber)
+	function addScore(score, idNum)
 	{
-		var id = "score" + idNumber;
-		scoreElm.innerHTML += "<div id='" + id  +
-							  "'class='score'>" +
-						  	  score + "</div>";
 
-		var scrElm = document.getElementById(id);// ERROR
-		scrElm.onclick = function() {
+		// element creation
+		var newScore = $("<div>", {
+			"class": "score",
+			"text": score
+		}).appendTo($("#scores"));
 
-			console.log("deleted");
-			scoreElm.removeChild(scrElm);
-			scores.splice(0, 1);
+		// addition of the event
+		$(".score:eq(" + idNum + ")").on("click", function() {
+
+			scores.splice($(this).index(), 1);
+			this.remove();
 			saveScores();
 
-		};
+		});
 
 	}
 
@@ -178,7 +178,7 @@
 	*/
 	function saveScores()
 	{
-		localStorage.scores = JSON.stringify(scores);
+		localStorage.StWscores = JSON.stringify(scores);
 	}
 
 
@@ -188,8 +188,8 @@
 	*/
 	function loadScores()
 	{
-		if (!localStorage.scores) return;
-		scores = JSON.parse(localStorage.scores);
+		if (!localStorage.StWscores) return;
+		scores = JSON.parse(localStorage.StWscores);
 		
 		for (var i = 0; i < scores.length; i++)
 			addScore(scores[i], i);
@@ -197,4 +197,4 @@
 	}
 
 
-})();
+})(jQuery);
