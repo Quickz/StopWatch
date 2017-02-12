@@ -191,12 +191,19 @@
 	 *
 	 */
 	function addDeletionEvent()
-	{//$("body").on("click", ".greeny", function()
+	{
 		$("#scores").on("click", ".score", function() {
 
-			scores.splice($(this).index(), 1);
-			this.remove();
-			saveScores();
+			var text = $(this).text();
+			var message = "Are you sure you want to " +
+ 						  "delete the \"" + text + "\"?";
+
+			if (confirm(message))
+			{
+				scores.splice($(this).index(), 1);
+				this.remove();
+				saveScores();
+			}
 
 		});
 	}
