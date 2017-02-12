@@ -18,7 +18,7 @@
 	 */
 	var keyDown = false;
 
-	addDeletionEvent();
+	$("#scores").on("click", ".score", deleteScore);
 	loadScores();
 
 
@@ -185,27 +185,25 @@
 
 	}
 
-
+	
 	/**
-	 * adds an event to all elements of score class
-	 *
+	 * deletes a score entry
+	 * 
 	 */
-	function addDeletionEvent()
+	function deleteScore()
 	{
-		$("#scores").on("click", ".score", function() {
 
-			var text = $(this).text();
-			var message = "Are you sure you want to " +
- 						  "delete the \"" + text + "\"?";
+		var text = $(this).text();
+		var message = "Are you sure you want to " +
+						  "delete the \"" + text + "\"?";
 
-			if (confirm(message))
-			{
-				scores.splice($(this).index(), 1);
-				this.remove();
-				saveScores();
-			}
+		if (confirm(message))
+		{
+			scores.splice($(this).index(), 1);
+			this.remove();
+			saveScores();
+		}
 
-		});
 	}
 
 
@@ -230,7 +228,7 @@
 		
 		for (var i = 0; i < scores.length; i++)
 			addScore(scores[i], i);
-			
+				
 	}
 
 
