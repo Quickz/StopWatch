@@ -13,7 +13,7 @@ body {
 	width: 55%;
 	height: 100%;
 	background: #1f3751;
-	border-radius: 15px;
+	border-radius: 15px 0 0 15px;
 }
 
 #timer {
@@ -37,7 +37,7 @@ body {
 	background: #1d2f46;
 	color: #41a9f0;
 	overflow-y: auto;
-	border-radius: 15px 0 0 15px;
+	border-radius: 0 15px 15px 0;
 	padding: 5px 0;
 	box-sizing: border-box;
 }
