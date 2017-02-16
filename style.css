@@ -1,34 +1,45 @@
 body {
-	
+	font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 #content {
 	margin: auto;
 	width: 550px;
 	height: 300px;
-	border: solid black 2px;
 }
 
 #clock {
 	float: left;
 	width: 55%;
 	height: 100%;
-	background: #c3c3c3;
+	background: #1f3751;
+	border-radius: 15px;
 }
 
 #timer {
-	margin: 40% 15%;
-	width: 70%;
+	margin: 10% 10%;
+	padding-top: 27%;
+	width: 80%;
+	height: 80%;
 	text-align: center;
-	background: #ffffff;
+	background: #1d2f46;
+	color: #41a9f0;
+	font-size: 45px;
+	border-radius: 50%;
+	border: solid #41a9f0 7px;
+	box-sizing: border-box;
 }
 
 #scores {
 	float: right;
 	width: 45%;
 	height: 100%;
-	background: #e1e1e1;
+	background: #1d2f46;
+	color: #41a9f0;
 	overflow-y: auto;
+	border-radius: 15px 0 0 15px;
+	padding: 5px 0;
+	box-sizing: border-box;
 }
 
 .score {
@@ -39,5 +50,6 @@ body {
 
 .score:hover {
 	background: #f1f1f1;
+	color: black;
 	cursor: pointer;
 }
