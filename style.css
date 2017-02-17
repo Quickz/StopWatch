@@ -53,3 +53,24 @@ body {
 	color: black;
 	cursor: pointer;
 }
+
+#options {
+	width: 100%;
+	padding: 5px;
+	box-sizing: border-box;
+	margin-bottom: 3px;
+	border-bottom: solid #41a9f0 2px;
+}
+
+#options button {
+	background: transparent;
+	color: #41a9f0;
+	font-size: 15px;
+	border: none;
+}
+
+#options button:hover {
+	background: #f1f1f1;
+	color: black;
+	cursor: pointer;
+}

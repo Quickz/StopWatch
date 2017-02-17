@@ -19,6 +19,7 @@
 	var keyDown = false;
 
 	$("#scores").on("click", ".score", deleteScore);
+	$("#reset").on("click", resetScores);
 	loadScores();
 
 
@@ -201,6 +202,24 @@
 		{
 			scores.splice($(this).index(), 1);
 			this.remove();
+			saveScores();
+		}
+
+	}
+
+
+	/**
+	 * deletes all of the saved scores
+	 *
+	 */
+	function resetScores()
+	{
+		var message = "Are you sure you want to reset all of your scores?";
+		
+		if (confirm(message))
+		{
+			scores = [];
+			$(".score").remove();
 			saveScores();
 		}
 
