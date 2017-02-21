@@ -58,13 +58,12 @@ body {
 	width: 100%;
 	padding-bottom: 4px;
 	box-sizing: border-box;
-	margin-bottom: 3px;
 	border-bottom: solid #41a9f0 2px;
 }
 
 #options button {
 	background: transparent;
-	padding: 2px;
+	margin-right: -3px;
 	width: 33%;
 	color: #41a9f0;
 	font-size: 15px;
@@ -76,3 +75,13 @@ body {
 	color: #f1f1f1;
 	cursor: pointer;
 }
+
+#scores-in-text {
+	position: absolute;
+	width: 248px;
+	height: 200px;
+	resize: none;
+	box-sizing: border-box;
+}
+
+

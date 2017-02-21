@@ -5,6 +5,7 @@
 	 * global variables
 	 *
 	 */
+	var scrTxt = $("#scores-in-text");
 	var scores = [];
 	var processing = false;
 	var timer;
@@ -20,6 +21,8 @@
 
 	$("#scores").on("click", ".score", deleteScore);
 	$("#reset").on("click", resetScores);
+	$("#import").on("click", importScores);
+	$("#export").on("click", exportScores);
 	loadScores();
 
 
@@ -248,6 +251,44 @@
 		for (var i = 0; i < scores.length; i++)
 			addScore(scores[i], i);
 				
+	}
+
+
+	/**
+	 * ?
+	 *
+	 */
+	function importScores()
+	{
+		scrTxt.toggle();
+		var visible = scrTxt.is(":visible");
+		if (visible)
+			scrTxt.text("");
+		else
+		{
+			var text = scrTxt.val().trim();
+			scores = text.split(" ");
+			saveScores();
+		}
+	}
+
+
+	/**
+	 * ?
+	 *
+	 */
+	function exportScores()
+	{
+		scrTxt.toggle();
+		var visible = scrTxt.is(":visible");
+		if (visible)
+		{
+			scrTxt.val("");
+			for (var i = 0; i < scores.length; i++)
+				scrTxt.val(scrTxt.val() + scores[i] + " ");
+
+		}
+
 	}
 
 
