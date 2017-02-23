@@ -76,12 +76,22 @@ body {
 	cursor: pointer;
 }
 
-#scores-in-text {
+.imp-exp-cont {
 	position: absolute;
-	width: 248px;
+	width: 240px;
+	margin: 7px 4px;
 	height: 200px;
+}
+
+.imp-exp-txt {
+	width: 100%;
+	height: 100%;
 	resize: none;
 	box-sizing: border-box;
+}
+
+.fl-right {
+	float: right;
 }
 
 

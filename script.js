@@ -5,7 +5,6 @@
 	 * global variables
 	 *
 	 */
-	var scrTxt = $("#scores-in-text");
 	var scores = [];
 	var processing = false;
 	var timer;
@@ -21,8 +20,12 @@
 
 	$("#scores").on("click", ".score", deleteScore);
 	$("#reset").on("click", resetScores);
-	$("#import").on("click", importScores);
-	$("#export").on("click", exportScores);
+	$("#import").on("click", toggleImport);
+	$("#export").on("click", toggleExport);
+	$("#ok-imp").on("click", acceptImport);
+	$("#cancel-imp").on("click", toggleImport);
+	$("#close-exp").on("click", toggleExport);
+	$("#copy-exp").on("click", copyExport);
 	loadScores();
 
 
@@ -199,7 +202,7 @@
 
 		var text = $(this).text();
 		var message = "Are you sure you want to " +
-						  "delete the \"" + text + "\"?";
+				      "delete the \"" + text + "\"?";
 
 		if (confirm(message))
 		{
@@ -255,40 +258,75 @@
 
 
 	/**
-	 * ?
-	 *
+	 * opens/closes a text window
+	 * for importing data
 	 */
-	function importScores()
+	function toggleImport()
 	{
-		scrTxt.toggle();
-		var visible = scrTxt.is(":visible");
-		if (visible)
-			scrTxt.text("");
-		else
-		{
-			var text = scrTxt.val().trim();
-			scores = text.split(" ");
-			saveScores();
-		}
+	 	$("#import-cont").toggle();
+		$("#export-cont").hide();
+		$("#import-txt").val("");
 	}
 
 
 	/**
-	 * ?
-	 *
+	 * accepts the input and replaces
+	 * previous scores with new ones
 	 */
-	function exportScores()
+	function acceptImport()
 	{
-		scrTxt.toggle();
-		var visible = scrTxt.is(":visible");
+		var text = $("#import-txt").val().trim();
+		scores = text.split(" ");
+		$(".score").remove();
+		saveScores();
+		loadScores();
+		toggleImport();
+	}
+
+
+	/**
+	 * opens/closes a text window with
+	 * score data in a text form
+	 */
+	function toggleExport()
+	{
+		var text = $("#export-txt");
+		var container = $("#export-cont");
+
+		container.toggle();
+		$("#import-cont").hide();
+
+		var visible = container.is(":visible");
 		if (visible)
 		{
-			scrTxt.val("");
+			text.val("");
 			for (var i = 0; i < scores.length; i++)
-				scrTxt.val(scrTxt.val() + scores[i] + " ");
-
+				text.val(text.val() + scores[i] + " ");
 		}
 
+	}
+
+
+	/**
+	 * copies the generated exportable
+	 * data - scores
+	 */
+	function copyExport()
+	{
+		var text = document.getElementById("export-txt");
+		if (document.selection)
+		{
+            var range = document.body.createTextRange();
+            range.moveToElementText(text);
+            range.select();
+        }
+        else if (window.getSelection)
+        {
+            var range = document.createRange();
+            range.selectNode(text);
+            window.getSelection().addRange(range);
+        }
+        document.execCommand("copy");
 	}
 
 

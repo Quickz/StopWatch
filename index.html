@@ -19,7 +19,18 @@
 				<button id="reset">Reset</button>
 				<button id="import">Import</button>
 				<button id="export">Export</button>
-				<textarea id="scores-in-text" hidden></textarea>
+				<div id="import-cont" class="imp-exp-cont" hidden>
+					<textarea id="import-txt" class="imp-exp-txt">
+					</textarea>
+					<button id="cancel-imp" class="fl-right">Cancel</button>
+					<button id="ok-imp" class="fl-right">Ok</button>
+				</div>
+				<div id="export-cont" class="imp-exp-cont" hidden>
+					<textarea id="export-txt" class="imp-exp-txt">
+					</textarea>
+					<button id="close-exp" class="fl-right">Close</button>
+					<button id="copy-exp" class="fl-right">Copy</button>
+				</div>
 			</div>
 		</div>
 
