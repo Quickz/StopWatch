@@ -206,7 +206,7 @@
 
 		if (confirm(message))
 		{
-			scores.splice($(this).index(), 1);
+			scores.splice($(this).index() - 1, 1);
 			this.remove();
 			saveScores();
 		}
