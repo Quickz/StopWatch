@@ -323,7 +323,7 @@
         else if (window.getSelection)
         {
             var range = document.createRange();
-            range.selectNode(text);
+            text.select();
             window.getSelection().addRange(range);
         }
         document.execCommand("copy");
